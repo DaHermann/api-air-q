@@ -1,0 +1,36 @@
+
+GET http://localhost:3000/stations
+
+
+
+
+### Sign in as an existing user
+POST http://localhost:3000/stations/create
+content-type: application/json
+
+{
+    "station_name": "SMART188",
+    "station_id": "283164601",
+    "station_lat": "646",
+    "station_lon": "55"
+}   
+
+
+### Update an existing user
+PATCH http://localhost:3000/stations/3
+content-type: application/json
+
+{
+    "station_name": "TestStatiosdsdcz54n32546",
+    "station_id": "1236548465",
+    "station_lat": "52",
+    "station_lon": "55"
+}   
+
+
+
+### Supprimer une station
+
+DELETE  http://localhost:3000/stations/2
+content-type: application/json
+

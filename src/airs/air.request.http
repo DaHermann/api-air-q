@@ -1,0 +1,48 @@
+
+GET http://localhost:3000/stations/air/get/SMART188/2024-11-11
+
+
+
+
+### Sign in as an existing user
+POST http://localhost:3000/stations/air/create
+content-type: application/json
+
+{
+    "station_name": "SMART188",
+    "day": "2023-11-10",
+    "hour": "23:00:00",
+    "co": 0,
+    "t_ext": 29.243334,
+    "t_int": 395.6,
+    "no2": 22.03992,
+    "o3": 15.132954,
+    "pm10": 20.6,
+    "pm2_5": 7.866667,
+    "rh": 80.80667
+}
+
+### Update an existing user
+PATCH http://localhost:3000/stations/air/update/4
+content-type: application/json
+
+{
+    "station_name": "SMART200",
+    "day": "2023-11-10",
+    "hour": "18:00:00",
+    "co": 0,
+    "t_ext": 29.243334,
+    "t_int": 395.6,
+    "no2": 22.03992,
+    "o3": 15.132954,
+    "pm10": 20.6,
+    "pm2_5": 7.866667,
+    "rh": 80.80667
+}
+
+
+### Supprimer une station
+
+DELETE  http://localhost:3000/stations/air/delete/2
+content-type: application/json
+

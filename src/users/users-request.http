@@ -1,0 +1,50 @@
+
+
+
+
+GET http://localhost:3000/users
+
+
+
+
+### Sign in as an existing user
+POST http://localhost:3000/users/signup
+content-type: application/json
+
+{
+  "username" : "test3",
+  "email": "test3@gmail.com",
+  "password": "test3"
+}
+
+
+### Update an existing user
+PATCH http://localhost:3000/users/3
+content-type: application/json
+
+{
+  "username": "test2",
+  "email": "d@hh.co",
+  "password": "12258535"
+}
+
+
+
+### Test ce connexion auth
+
+POST http://localhost:3000/users/signin
+content-type: application/json
+
+{
+  "email": "test1@gmail.com",
+  "password": "test4"
+}
+ ###"email": "test6@hhh.co",
+# "password": "588ggg"
+
+
+
+### Delete an existing user
+DELETE  http://localhost:3000/users/1
+content-type: application/json
+

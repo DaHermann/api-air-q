@@ -16,28 +16,28 @@ export class CreateAirDto {
     hour: string
 
     @IsNumber()
-    co: number
+    co: string
 
     @IsNumber()
-    t_ext: number
+    t_ext: string
 
     @IsNumber()
-    t_int: number
+    t_int: string
 
     @IsNumber()
-    no2:  number
+    no2:  string
 
     @IsNumber()
-    o3: number
+    o3: string
 
     @IsNumber()
-    pm10: number
+    pm10: string
 
     @IsNumber()
-    pm2_5: number 
+    pm2_5: string 
 
     @IsNumber()
-    rh: number
+    rh: string
 
     // @IsNumber()
     // _id_station: number
@@ -60,38 +60,38 @@ export class UpdateAirDto {
 
     @IsOptional()
     @IsNumber()
-    co: number
+    co: string
 
 
     @IsOptional()
     @IsNumber()
-    t_ext: number
+    t_ext: string
 
 
     @IsOptional()
     @IsNumber()
-    t_int: number
+    t_int: string
 
 
     @IsOptional()
     @IsNumber()
-    no2:  number
+    no2:  string
 
     @IsOptional()
     @IsNumber()
-    o3: number
+    o3: string
 
     @IsOptional()
     @IsNumber()
-    pm10: number
+    pm10: string
 
     @IsOptional()
     @IsNumber()
-    pm2_5: number 
+    pm2_5: string 
 
     @IsOptional()
     @IsNumber()
-    rh: number
+    rh: string
 
     // @IsOptional()
     // @IsNumber()

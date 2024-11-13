@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, IsNull} from 'typeorm';
 
 
 
@@ -17,28 +17,28 @@ export class Air {
     hour: string
 
     @Column()
-    co: number
+    co: string
 
     @Column()
-    t_ext: number
+    t_ext: string
 
     @Column()
-    t_int: number
+    t_int: string
 
     @Column()
-    no2:  number
+    no2:  string
 
     @Column()
-    o3: number
+    o3: string
 
     @Column()
-    pm10: number
+    pm10: string
 
     @Column()
-    pm2_5: number 
+    pm2_5: string 
 
     @Column()
-    rh: number
+    rh: string
 
     // @Column()
     // _id_station: number

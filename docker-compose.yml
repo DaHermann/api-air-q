@@ -1,15 +1,15 @@
-# version: '3.7'
-# services:
-#   postgres:
-#     image: postgres:13
-#     container_name: postgres_db
-#     ports:
-#       - '5432:5432'
-#     environment:
-#       POSTGRES_DB: api_db
-#       POSTGRES_USER: api_user
-#       POSTGRES_PASSWORD: api_password
-#     volumes:
-#       - postgres_data:/var/lib/postgresql/data
-# volumes:
-#   postgres_data:
+version: '3.7'
+services:
+  postgres:
+    image: postgres
+    container_name: air_postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:

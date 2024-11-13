@@ -40,7 +40,6 @@ let AqinoService = class AqinoService {
                     await dataJSON.data.forEach(async (air) => {
                         const [day, hour] = air.timestamp.split(' ');
                         const dataTosave = {
-                            station_id: dataJSON.header.station_id,
                             station_name: dataJSON.header.station_name,
                             day: day,
                             hour: hour,

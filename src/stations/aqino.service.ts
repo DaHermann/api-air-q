@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit, OnApplicationBootstrap, ConsoleLogger } from '@nestjs/common';
 import { StationsService } from 'src/stations/stations.service';
 import { AirsService } from 'src/airs/air.service';
+import { CreateAirDto } from '../airs/air-dto/air.dto';
 
 
 
@@ -51,8 +52,8 @@ export class AqinoService implements OnModuleInit {
             // console.log('Station',header.station_name);
             const [day, hour]: string[] = air.timestamp.split(' ');
             
-            const dataTosave = {
-              station_id: dataJSON.header.station_id,
+            const dataTosave : CreateAirDto = {
+              // station_id: dataJSON.header.station_id,
               station_name: dataJSON.header.station_name,
               day: day,
               hour: hour,
@@ -65,6 +66,7 @@ export class AqinoService implements OnModuleInit {
               pm2_5: air['PM2.5'], 
               rh: air.RH
             }
+
             await this.airsService.createAirData(dataTosave);
           })
   

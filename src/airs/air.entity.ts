@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, IsNull} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
 
 
@@ -7,37 +7,37 @@ export class Air {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ nullable: true })
     station_name: string
 
-    @Column()
+    @Column({ nullable: true })
     day: string
 
-    @Column()
+    @Column({ nullable: true })
     hour: string
 
-    @Column()
+    @Column({ nullable: true })
     co: string
 
-    @Column()
+    @Column({ nullable: true })
     t_ext: string
 
-    @Column()
+    @Column({ nullable: true })
     t_int: string
 
-    @Column()
+    @Column({ nullable: true })
     no2:  string
 
-    @Column()
+    @Column({ nullable: true })
     o3: string
 
-    @Column()
+    @Column({ nullable: true })
     pm10: string
 
-    @Column()
+    @Column({ nullable: true })
     pm2_5: string 
 
-    @Column()
+    @Column({ nullable: true })
     rh: string
 
     // @Column()

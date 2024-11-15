@@ -6,15 +6,20 @@ GET http://localhost:3000/users
 
 
 
+###
+GET http://localhost:3000/users/1
+
+
+
 
 ### Sign in as an existing user
 POST http://localhost:3000/users/signup
 content-type: application/json
 
 {
-  "username" : "test3",
-  "email": "test3@gmail.com",
-  "password": "test3"
+  "username" : "test11",
+  "email": "test11@gmail.com",
+  "password": "test11"
 }
 
 
@@ -36,8 +41,8 @@ POST http://localhost:3000/users/signin
 content-type: application/json
 
 {
-  "email": "test1@gmail.com",
-  "password": "test4"
+  "email": "test11@gmail.com",
+  "password": "tesxt11"
 }
  ###"email": "test6@hhh.co",
 # "password": "588ggg"

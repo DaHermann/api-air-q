@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersController } from './users/users.controller';
@@ -14,6 +14,10 @@ import { AirsModule } from './airs/airs.module';
 import { AirsService } from './airs/air.service';
 import { Air } from './airs/air.entity';
 import { Station } from './stations/station.entity';
+import { ApiModule } from './api/api.module';
+import {AuthMiddleware} from './api/auth.middleware';
+import { ApiController } from './api/api.controller';
+import { ApiService } from './api/api.service';
 
 @Module({
   imports: [
@@ -34,7 +38,6 @@ import { Station } from './stations/station.entity';
 
         return {
           type: 'postgres',
-          // url: 'postgres://avnadmin:AVNS_FN6zZMtNIGTE3pOcFlm@@pg-3532ae1f-ndanielhermann-76fa.j.aivencloud.com:16274/api-air-db?sslmode=require',
           host: 'localhost',
           port: 5432,
           password: 'postgres',
@@ -51,8 +54,18 @@ import { Station } from './stations/station.entity';
     UsersModule,
     StationsModule,
     AirsModule,
+    ApiModule,
   ],
-  controllers: [AppController, UsersController, StationsController],
-  providers: [AppService, UsersService, AirsService, StationsService],
+  controllers: [AppController, UsersController, StationsController,ApiController],
+  providers: [AppService, UsersService, AirsService, StationsService, ApiService],
 })
-export class AppModule {}
+
+export class AppModule  implements NestModule {
+
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes({path:'api/*', method: RequestMethod.ALL});
+  }
+  
+}

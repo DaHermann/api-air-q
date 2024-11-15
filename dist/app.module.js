@@ -23,7 +23,16 @@ const airs_module_1 = require("./airs/airs.module");
 const air_service_1 = require("./airs/air.service");
 const air_entity_1 = require("./airs/air.entity");
 const station_entity_1 = require("./stations/station.entity");
+const api_module_1 = require("./api/api.module");
+const auth_middleware_1 = require("./api/auth.middleware");
+const api_controller_1 = require("./api/api.controller");
+const api_service_1 = require("./api/api.service");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(auth_middleware_1.AuthMiddleware)
+            .forRoutes({ path: 'api/*', method: common_1.RequestMethod.ALL });
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
@@ -52,9 +61,10 @@ exports.AppModule = AppModule = __decorate([
             users_module_1.UsersModule,
             stations_module_1.StationsModule,
             airs_module_1.AirsModule,
+            api_module_1.ApiModule,
         ],
-        controllers: [app_controller_1.AppController, users_controller_1.UsersController, stations_controller_1.StationsController],
-        providers: [app_service_1.AppService, users_service_1.UsersService, air_service_1.AirsService, stations_service_1.StationsService],
+        controllers: [app_controller_1.AppController, users_controller_1.UsersController, stations_controller_1.StationsController, api_controller_1.ApiController],
+        providers: [app_service_1.AppService, users_service_1.UsersService, air_service_1.AirsService, stations_service_1.StationsService, api_service_1.ApiService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

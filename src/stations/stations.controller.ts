@@ -11,12 +11,11 @@ import { CreateAirDto, UpdateAirDto } from '../airs/air-dto/air.dto';
 
 
 @Controller('stations')
-export class StationsController {
+export class StationsController{
   constructor(
     private readonly stationsService: StationsService,
     private readonly airService: AirsService,
   ) {}
-
 
 
 
@@ -25,8 +24,6 @@ export class StationsController {
     // console.log('Station get all');
     return this.stationsService.getAllStations();
   }
-
-
 
 
 
@@ -48,14 +45,12 @@ export class StationsController {
 
 
 
-
   @Post('/air/create')
   async CreateStationAir(
     @Body() body: CreateAirDto
   ){
     return await this.airService.createAirData(body)
   }
-
 
 
 
@@ -67,10 +62,6 @@ export class StationsController {
     return await this.airService.update(parseInt(id),body)
   }
 
-
-
-
-
   @Delete('/air/delete/:id')
   async deleteAir(
     @Param('id') id: number
@@ -80,14 +71,10 @@ export class StationsController {
 
 
 
-
-
   @Get('/get/:id')
   async getOneStation(@Param('id') id: string) {
     return await this.stationsService.getOneStation(parseInt(id));
   }
-
-
 
 
 
@@ -101,7 +88,6 @@ export class StationsController {
       station_lon
     );
   }
-
 
 
 

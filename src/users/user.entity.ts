@@ -1,8 +1,7 @@
 import {
     Entity,
     Column,
-    PrimaryGeneratedColumn,
-    Unique,
+    PrimaryGeneratedColumn
 } from 'typeorm';
 
 
@@ -17,9 +16,11 @@ export class User {
     @Column()
     email: string;
    
-
     @Column()
     password: string;
 
-    
+    @Column()
+    api_key: string;
+
 }
+

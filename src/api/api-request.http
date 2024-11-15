@@ -1,0 +1,20 @@
+
+GET http://localhost:3000/api/v1
+
+
+
+###
+GET http://localhost:3000/api/v1/stations
+
+
+
+### Get air data by Stattion
+GET http://localhost:3000/api/v1/air/get/SMART189
+
+
+
+### Get Air data by Day
+GET http://localhost:3000/api/v1/air/get/SMART188/2024-11-11
+api_key:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q0QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidGVzdDQiLCJpYXQiOjE3MzE2NjQyODcsImV4cCI6MTczNDI1NjI4N30.ccehVXdAjD6ktyJUucDR_JoxL7ExzbO7OtgBVVV8aPI
+
+

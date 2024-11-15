@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
+const jwt_1 = require("@nestjs/jwt");
 let UsersService = class UsersService {
-    constructor(repo) {
+    constructor(repo, jwtService) {
         this.repo = repo;
+        this.jwtService = jwtService;
     }
     async create(username, email, password) {
         const isUser = await this.repo.findOneBy({ email });
@@ -27,24 +29,38 @@ let UsersService = class UsersService {
             throw new common_1.BadRequestException('Ce compte existe déja');
         }
         else {
-            const user = await this.repo.create({ username, email, password });
+            const payload = { email: email, username: username };
+            const api_key = await this.jwtService.signAsync(payload);
+            const user = await this.repo.create({ username, email, password, api_key });
             return this.repo.save(user);
         }
     }
-    findOneById(id) {
+    async findOneById(id) {
         if (!id) {
             return null;
         }
-        return this.repo.findOneBy({ id });
-    }
-    async findByEmail(email, password) {
-        console.log("Email:  " + email, "Password:   " + password);
-        const user = await this.repo.findOneBy({ email });
+        const user = await this.repo.findOneBy({ id });
         if (!user) {
             throw new common_1.NotFoundException('Utilisateur Introuvable');
         }
-        if (user.password !== password) {
-            throw new common_1.NotFoundException('Mot de passe incorrect');
+        return user;
+    }
+    async findOneApi_key(api_key) {
+        console.log('findOneApi_key api_key:' + api_key);
+        if (!api_key) {
+            return null;
+        }
+        const user = await this.repo.findOneBy({ api_key });
+        console.log('user:' + user);
+        if (!user) {
+            return false;
+        }
+        return true;
+    }
+    async findByEmail(email) {
+        const user = await this.repo.findOneBy({ email });
+        if (!user) {
+            throw new common_1.NotFoundException('Utilisateur Introuvable');
         }
         return user;
     }
@@ -71,6 +87,7 @@ exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        jwt_1.JwtService])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

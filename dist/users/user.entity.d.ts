@@ -3,4 +3,5 @@ export declare class User {
     username: string;
     email: string;
     password: string;
+    api_key: string;
 }

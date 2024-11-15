@@ -18,6 +18,7 @@ const users_service_1 = require("./users.service");
 const create_users_dto_1 = require("./users-dto/create-users.dto");
 const update_users_dto_1 = require("./users-dto/update-users.dto");
 const signin_users_dto_1 = require("./users-dto/signin-users.dto");
+const bcrypt = require("bcrypt");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -28,18 +29,31 @@ let UsersController = class UsersController {
     getOneUser(id) {
         return this.usersService.findOneById(id);
     }
-    createUser(body) {
+    async createUser(body) {
         console.log(body);
-        return this.usersService.create(body.username, body.email, body.password);
+        const passwordHash = await PasswordHasher(body.password);
+        return await this.usersService.create(body.username, body.email, passwordHash);
     }
-    signinUser(body) {
-        return this.usersService.findByEmail(body.email, body.password);
+    async signinUser(body) {
+        const user = await this.usersService.findByEmail(body.email);
+        if (!user) {
+            throw new common_1.NotFoundException('Compte Inexistant');
+        }
+        const isTheSamePassword = await PasswordCompare(body.password, user.password);
+        if (!isTheSamePassword) {
+            throw new common_1.NotFoundException('Compte Inexistant / Mot de pass incorrect');
+        }
+        return user;
     }
     removeUser(id) {
         return this.usersService.delete(parseInt(id));
     }
     async updateUser(id, body) {
         console.log(body);
+        if (body.password) {
+            const passwordHash = await PasswordHasher(body.password);
+            body.password = passwordHash;
+        }
         return await this.usersService.update(parseInt(id), body);
     }
 };
@@ -62,14 +76,14 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_users_dto_1.CreateUserDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createUser", null);
 __decorate([
     (0, common_1.Post)('/signin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signin_users_dto_1.signinUsersDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "signinUser", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
@@ -90,4 +104,20 @@ exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
+async function PasswordHasher(password) {
+    console.log('Password to hash :' + password);
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(password, salt);
+    console.log('salt :' + salt);
+    console.log('hash :' + hash);
+    return hash;
+}
+async function PasswordCompare(passwordTocompare, userPassord) {
+    const isMatch = await bcrypt.compare(passwordTocompare, userPassord);
+    if (!isMatch) {
+        return false;
+    }
+    return true;
+}
 //# sourceMappingURL=users.controller.js.map

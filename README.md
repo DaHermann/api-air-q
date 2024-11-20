@@ -58,6 +58,18 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Deploying database with docker
+
+```
+## SetUp database ##
+#Get posgres SQL Image based on docker-compase.yml file
+RUN docker compose up -d
+
+# Run Postgres SQL database container
+RUN docker run --name air_postgres_db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).

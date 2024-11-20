@@ -64,12 +64,11 @@ $ yarn run test:cov
 ## SetUp database ##
 #Get posgres SQL Image based on docker-compase.yml file
 
-$ RUN docker compose up -d
+$ docker compose up -d
 
 # Run Postgres SQL database container
 
-$ RUN docker run --name air_postgres_db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
-
+$ docker run --name air_postgres_db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 ```
 
 ## Support

@@ -12,8 +12,8 @@ export class Station {
     station_id: number;
 
     @Column()
-    station_lat: number;
+    station_lat: string;
 
     @Column()
-    station_lon: number;
+    station_lon: string;
 }   

@@ -19,8 +19,8 @@ export class StationsService {
     async createStation(
             station_name: string,
             station_id: number,
-            station_lat: number,
-            station_lon: number
+            station_lat: string,
+            station_lon: string
     ) {
         const isStationExist = await this.repo.findOneBy({station_name});
         if (isStationExist) {

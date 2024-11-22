@@ -36,10 +36,14 @@ export class AqinoService implements OnModuleInit {
 
   }
 
+  /**
+   * function de remplissage de la base de donnée
+   */
   async saveData() {
     const stationIDs = [283164601,283181971];
 
     const dbDATA = await this.airsService.findAll();
+    const stationDbDATA = await this.stationsService.getAllStations();
 
     if (dbDATA.length == 0) {
       stationIDs.map(async (stationID) => {
@@ -47,7 +51,21 @@ export class AqinoService implements OnModuleInit {
         await fetch(`https://airqino-api.magentalab.it/v3/getStationHourlyAvg/${stationID}`)
         .then(response => response.json())
         .then(async dataJSON => {
-  
+
+          // Insertion de chaque donnée la station
+          if(stationDbDATA.length == 0){
+            await dataJSON.headers.forEach( async stationDADA => {
+
+              await this.stationsService.createStation(
+                stationDADA.station_name, 
+                stationID,
+                stationDADA.station_lat,
+                stationDADA.station_lon
+              );
+            })
+          }
+
+          // Insertion de chaque donnée de l'air
           await dataJSON.data.forEach( async air => { 
             // console.log('Station',header.station_name);
             const [day, hour]: string[] = air.timestamp.split(' ');

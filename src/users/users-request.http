@@ -42,7 +42,7 @@ content-type: application/json
 
 {
   "email": "test11@gmail.com",
-  "password": "tesxt11"
+  "password": "test11"
 }
  ###"email": "test6@hhh.co",
 # "password": "588ggg"

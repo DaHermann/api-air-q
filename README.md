@@ -45,17 +45,17 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
+## Deploying database with docker
 
-```bash
-# unit tests
-$ yarn run test
+```
+## SetUp database ##
+#Get posgres SQL Image based on docker-compase.yml file
 
-# e2e tests
-$ yarn run test:e2e
+$ docker compose up -d
 
-# test coverage
-$ yarn run test:cov
+# Run Postgres SQL database container
+
+$ docker run --name air_postgres_db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 ```
 
 ## Support
